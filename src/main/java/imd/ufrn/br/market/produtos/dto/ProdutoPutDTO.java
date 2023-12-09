@@ -1,4 +1,4 @@
-package imd.ufrn.br.market.dto;
+package imd.ufrn.br.market.produtos.dto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;

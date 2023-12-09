@@ -1,0 +1,4 @@
+# Diretório do IDE (por exemplo, IntelliJ, Eclipse)
+.idea/
+# Arquivos de compilação
+target/

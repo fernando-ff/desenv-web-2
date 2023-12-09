@@ -1,10 +1,12 @@
-package imd.ufrn.br.market.entity;
+package imd.ufrn.br.market.produtos.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Data
@@ -35,9 +37,18 @@ public class ProdutosEntity {
     @Column(name = "estoque")
     private Integer estoque;
 
-    @Column(name = "fornecedor", length = 50)
+    @Column(name = "fornecedor", length = 15)
     private String fornecedor;
 
     @Column(name = "ativo")
     private Integer ativo;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private CategoriaEntity categoria;
+
+
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private PedidoEntity pedido;
 }

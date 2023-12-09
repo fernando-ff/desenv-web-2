@@ -1,12 +1,13 @@
-package imd.ufrn.br.market.dto;
+package imd.ufrn.br.market.produtos.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-
+@Builder
 public class ProdutoPostDTO {
     @NotNull
     @NotEmpty
@@ -31,4 +32,8 @@ public class ProdutoPostDTO {
     @NotNull
     @NotEmpty
     private String fornecedor;
+    
+    @NotNull
+    @NotEmpty
+    private Integer categoriaId;
 }

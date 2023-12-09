@@ -1,5 +1,6 @@
 package imd.ufrn.br.market.usuarios.controller;
 
+import imd.ufrn.br.market.exception.BadRequestException;
 import imd.ufrn.br.market.usuarios.model.AutenticationDTO;
 import imd.ufrn.br.market.usuarios.model.LoginResponseDTO;
 import imd.ufrn.br.market.usuarios.model.RegistrarDTO;
@@ -30,7 +31,7 @@ public class AutenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AutenticationDTO data){
+    public ResponseEntity login(@RequestBody @Valid AutenticationDTO data) throws BadRequestException {
         var usuarioSenha = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = authenticationManager.authenticate(usuarioSenha);
         var token = tokenService.genereteToken((UsuarioEntity) auth.getPrincipal());

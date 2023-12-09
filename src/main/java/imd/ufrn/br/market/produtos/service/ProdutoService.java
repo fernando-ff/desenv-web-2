@@ -1,10 +1,11 @@
-package imd.ufrn.br.market.service;
+package imd.ufrn.br.market.produtos.service;
 
-import imd.ufrn.br.market.dto.ProdutoPostDTO;
-import imd.ufrn.br.market.dto.ProdutoPutDTO;
-import imd.ufrn.br.market.entity.ProdutosEntity;
+import imd.ufrn.br.market.produtos.dto.ProdutoPostDTO;
+import imd.ufrn.br.market.produtos.dto.ProdutoPutDTO;
+import imd.ufrn.br.market.produtos.entity.CategoriaEntity;
+import imd.ufrn.br.market.produtos.entity.ProdutosEntity;
 import imd.ufrn.br.market.exception.BadRequestException;
-import imd.ufrn.br.market.repository.ProdutoRepository;
+import imd.ufrn.br.market.produtos.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,9 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository repository;
 
+
+    @Autowired
+    private CategoriaService categoriaService;
     public ProdutosEntity findById(@PathVariable Integer id) {
         return repository.findByIdAndAtivoTrue(id)
                 .orElseThrow(() -> new BadRequestException("Produto não encontrado!"));
@@ -26,7 +30,9 @@ public class ProdutoService {
         return repository.findAllByAtivoTrue();
     }
 
-    public void save(ProdutoPostDTO produtoPostDTO) {
+    public void save(ProdutoPostDTO produtoPostDTO) throws BadRequestException{
+        CategoriaEntity categoria = categoriaService.findById(produtoPostDTO.getCategoriaId());
+
         ProdutosEntity produtosEntity = ProdutosEntity.builder()
                 .nomeProduto(produtoPostDTO.getNomeProduto())
                 .descricaoProduto(produtoPostDTO.getDescricaoProduto())
@@ -34,6 +40,7 @@ public class ProdutoService {
                 .estoque(produtoPostDTO.getEstoque())
                 .precoProduto(produtoPostDTO.getPrecoProduto())
                 .fornecedor(produtoPostDTO.getFornecedor())
+                .categoria(categoria)
                 .ativo(1)
                 .build();
         repository.save(produtosEntity);

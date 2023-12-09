@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS  pedido;
+CREATE TABLE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero_pedido VARCHAR(255) NOT NULL,
+);
+

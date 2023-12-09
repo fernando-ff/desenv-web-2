@@ -1,6 +1,6 @@
-package imd.ufrn.br.market.repository;
+package imd.ufrn.br.market.produtos.repository;
 
-import imd.ufrn.br.market.entity.ProdutosEntity;
+import imd.ufrn.br.market.produtos.entity.ProdutosEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

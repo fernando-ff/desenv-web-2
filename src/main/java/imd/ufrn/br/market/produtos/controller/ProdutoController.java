@@ -1,13 +1,12 @@
-package imd.ufrn.br.market.controller;
+package imd.ufrn.br.market.produtos.controller;
 
-import imd.ufrn.br.market.dto.ProdutoPostDTO;
-import imd.ufrn.br.market.dto.ProdutoPutDTO;
-import imd.ufrn.br.market.entity.ProdutosEntity;
+import imd.ufrn.br.market.produtos.dto.ProdutoPostDTO;
+import imd.ufrn.br.market.produtos.dto.ProdutoPutDTO;
+import imd.ufrn.br.market.produtos.entity.ProdutosEntity;
 import imd.ufrn.br.market.exception.BadRequestException;
-import imd.ufrn.br.market.service.ProdutoService;
+import imd.ufrn.br.market.produtos.service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
