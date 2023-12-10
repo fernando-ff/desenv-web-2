@@ -22,45 +22,25 @@ public class ProdutoService {
     @Autowired
     private CategoriaService categoriaService;
     public ProdutosEntity findById(@PathVariable Integer id) {
-        return repository.findByIdAndAtivoTrue(id)
-                .orElseThrow(() -> new BadRequestException("Produto não encontrado!"));
+        return repository.findById(id).orElseThrow(() -> new BadRequestException(""));
     }
 
     public List<ProdutosEntity> findAll() {
-        return repository.findAllByAtivoTrue();
+        return repository.findAll();
     }
 
     public void save(ProdutoPostDTO produtoPostDTO) throws BadRequestException{
         CategoriaEntity categoria = categoriaService.findById(produtoPostDTO.getCategoriaId());
 
         ProdutosEntity produtosEntity = ProdutosEntity.builder()
-                .nomeProduto(produtoPostDTO.getNomeProduto())
-                .descricaoProduto(produtoPostDTO.getDescricaoProduto())
-                .dataValidade(produtoPostDTO.getDataValidade())
-                .estoque(produtoPostDTO.getEstoque())
-                .precoProduto(produtoPostDTO.getPrecoProduto())
-                .fornecedor(produtoPostDTO.getFornecedor())
                 .categoria(categoria)
-                .ativo(1)
                 .build();
         repository.save(produtosEntity);
     }
 
     public void update(ProdutoPutDTO produtoPutDTO) {
-        ProdutosEntity produtosEntity = repository.findByIdAndAtivoTrue(produtoPutDTO.getId())
+        ProdutosEntity produtosEntity = repository.findById(produtoPutDTO.getId())
                 .orElseThrow(() -> new BadRequestException("Produto não encontrado!"));
-
-        String nomeProduto = produtoPutDTO.getNomeProduto() == null ? produtosEntity.getNomeProduto() : produtoPutDTO.getNomeProduto();
-        String descricaoProduto = produtoPutDTO.getDescricaoProduto() == null ? produtosEntity.getDescricaoProduto() : produtoPutDTO.getDescricaoProduto();
-        String dataValidade = produtoPutDTO.getDataValidade() == null ? produtosEntity.getDataValidade() : produtoPutDTO.getDataValidade();
-        Integer estoque = produtoPutDTO.getEstoque() == null ? produtosEntity.getEstoque() : produtoPutDTO.getEstoque();
-        Double preco = produtoPutDTO.getPrecoProduto() == null ? produtosEntity.getEstoque() : produtoPutDTO.getPrecoProduto();
-
-        produtosEntity.setNomeProduto(nomeProduto);
-        produtosEntity.setDescricaoProduto(descricaoProduto);
-        produtosEntity.setDataValidade(dataValidade);
-        produtosEntity.setEstoque(estoque);
-        produtosEntity.setPrecoProduto(preco);
 
         repository.save(produtosEntity);
     }
@@ -72,9 +52,8 @@ public class ProdutoService {
     }
 
     public void deleteLogic(Integer id) {
-        ProdutosEntity resposta = repository.findByIdAndAtivoTrue(id)
+        ProdutosEntity resposta = repository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Produto não encontrado!"));
-        resposta.setAtivo(0);
         repository.save(resposta);
     }
 }

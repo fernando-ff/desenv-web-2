@@ -1,25 +1,26 @@
-
-INSERT INTO categoria (nome_categoria) VALUES
+INSERT INTO categoria (nome) VALUES
     ('Eletrônicos'),
     ('Roupas'),
-    ('Alimentos');
-
-INSERT INTO cliente (nome_cliente) VALUES
+    ('Livros');
+INSERT INTO produto (nome, categoria_id) VALUES
+    ('Smartphone', 1),
+    ('Laptop', 1),
+    ('Camiseta', 2),
+    ('Calça Jeans', 2),
+    ('Java Programming Book', 3),
+    ('History Book', 3);
+INSERT INTO cliente (nome) VALUES
     ('João Silva'),
     ('Maria Oliveira'),
-    ('Carlos Santos');
-INSERT INTO pedido (numero_pedido, cliente_id) VALUES
-    ('P12345', 1),
-    ('P67890', 2),
-    ('P54321', 3);
-INSERT INTO produto (nome_produto, descricao_produto, preco_produto, data_validade, estoque, fornecedor, ativo, categoria_id, pedido_id) VALUES
-    ('Smartphone', 'Último modelo', 999.99, '2023-12-31', 50, "fornecedor A", 1, 1, 1),
-    ('Camiseta', 'Malha confortável', 29.99, '2023-12-31', 100, "fornecedor A", 1, 2, 2),
-    ('Arroz', 'Tipo 1, 5kg', 10.99, '2024-12-31', 200, 3, "fornecedor A", 3, 3);
-
-INSERT INTO cliente_produto (cliente_id, produto_id) VALUES
+    ('Carlos Pereira');
+INSERT INTO pedido (cliente_id) VALUES
+    (1),
+    (2),
+    (3);
+INSERT INTO pedido_produto (pedido_id, produto_id) VALUES
     (1, 1),
+    (1, 3),
     (2, 2),
-    (3, 3),
-    (1, 2),
-    (2, 3);
+    (2, 4),
+    (3, 5),
+    (3, 6);

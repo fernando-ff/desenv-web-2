@@ -7,13 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 @Data
 @Entity
-@Table(name = "categoria")
+@Table(name = "cliente")
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoriaEntity {
+public class ClienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +20,6 @@ public class CategoriaEntity {
 
     private String nome;
 
-    @OneToMany(mappedBy = "categoria")
-    private List<ProdutosEntity> produtos;
+    @OneToMany(mappedBy = "cliente")
+    private List<PedidoEntity> pedidos;
 }

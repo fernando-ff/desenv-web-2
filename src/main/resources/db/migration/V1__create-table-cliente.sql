@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS cliente;
-CREATE TABLE IF NOT EXISTS cliente (
+CREATE TABLE cliente (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cliente VARCHAR(50) NOT NULL
+    nome VARCHAR(255)
 );
-

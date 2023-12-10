@@ -6,23 +6,25 @@ import lombok.*;
 import java.util.List;
 
 @Data
-@Builder
 @Entity
 @Table(name = "pedido")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class PedidoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    private Long id;
 
-    @Column(name = "numero_pedido", nullable = false)
-    private String numeroPedido;
-
-
-    // One-to-Many relationship with ProdutosEntity
-    @OneToMany(mappedBy = "pedido")
+    @ManyToMany
+    @JoinTable(
+            name = "pedido_produto",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id")
+    )
     private List<ProdutosEntity> produtos;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private ClienteEntity cliente;
 }
