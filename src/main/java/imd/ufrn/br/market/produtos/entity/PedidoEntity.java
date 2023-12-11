@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
 @Table(name = "pedido")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +15,11 @@ public class PedidoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+
+    private Integer quantidade;
+
+    private Integer ativo;
 
     @ManyToMany
     @JoinTable(

@@ -17,9 +17,11 @@ public class CategoriaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    private String nome;
+    private String nomeCategoria;
+
+    private Boolean ativo;
 
     @OneToMany(mappedBy = "categoria")
     private List<ProdutosEntity> produtos;

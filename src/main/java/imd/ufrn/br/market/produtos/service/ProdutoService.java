@@ -1,7 +1,6 @@
 package imd.ufrn.br.market.produtos.service;
 
-import imd.ufrn.br.market.produtos.dto.ProdutoPostDTO;
-import imd.ufrn.br.market.produtos.dto.ProdutoPutDTO;
+import imd.ufrn.br.market.produtos.dto.ProdutoDTO;
 import imd.ufrn.br.market.produtos.entity.CategoriaEntity;
 import imd.ufrn.br.market.produtos.entity.ProdutosEntity;
 import imd.ufrn.br.market.exception.BadRequestException;
@@ -22,14 +21,15 @@ public class ProdutoService {
     @Autowired
     private CategoriaService categoriaService;
     public ProdutosEntity findById(@PathVariable Integer id) {
-        return repository.findById(id).orElseThrow(() -> new BadRequestException(""));
+        return repository.findByIdAndAtivoTrue(id)
+                .orElseThrow(() -> new BadRequestException("PRODUTO NÃO ENCONTRADO"));
     }
 
     public List<ProdutosEntity> findAll() {
         return repository.findAll();
     }
 
-    public void save(ProdutoPostDTO produtoPostDTO) throws BadRequestException{
+    public void save(ProdutoDTO produtoPostDTO) throws BadRequestException{
         CategoriaEntity categoria = categoriaService.findById(produtoPostDTO.getCategoriaId());
 
         ProdutosEntity produtosEntity = ProdutosEntity.builder()
@@ -38,8 +38,8 @@ public class ProdutoService {
         repository.save(produtosEntity);
     }
 
-    public void update(ProdutoPutDTO produtoPutDTO) {
-        ProdutosEntity produtosEntity = repository.findById(produtoPutDTO.getId())
+    public void update(ProdutoDTO produtoDTO) {
+        ProdutosEntity produtosEntity = repository.findById(produtoDTO.getId())
                 .orElseThrow(() -> new BadRequestException("Produto não encontrado!"));
 
         repository.save(produtosEntity);

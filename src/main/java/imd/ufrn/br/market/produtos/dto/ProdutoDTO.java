@@ -1,27 +1,41 @@
 package imd.ufrn.br.market.produtos.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class ProdutoPutDTO {
+@Builder
+public class ProdutoDTO {
+
+    private Integer id;
+    @NotNull
+    @NotEmpty
+    private String nomeProduto;
 
     @NotNull
-    private Integer id;
-    private String nomeProduto;
+    @NotEmpty
     private String descricaoProduto;
+
+    @NotNull
+    @Min(value = 0)
     private Double precoProduto;
+
+    @NotNull
+    @NotEmpty
     private String dataValidade;
+
+    @NotNull
+    @Min(value = 0)
     private Integer estoque;
+
+    @NotNull
+    @NotEmpty
     private String fornecedor;
-    private Integer ativo;
+    
+    @NotNull
+    @NotEmpty
+    private Integer categoriaId;
 }

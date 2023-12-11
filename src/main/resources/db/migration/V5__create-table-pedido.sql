@@ -1,5 +1,7 @@
 CREATE TABLE pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    quantidade INT NOT NULL,
+    ativo INT NOT NULL,
     cliente_id INT,
     FOREIGN KEY (cliente_id) REFERENCES cliente(id)
 );
